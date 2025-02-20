@@ -17,6 +17,7 @@
             white-space: nowrap;
             overflow: hidden;
             animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+            max-width: fit-content; /* Prevent cursor from going beyond the page */
         }
         @keyframes typing {
             from { width: 0; }
@@ -42,7 +43,7 @@
             if (isCLIUserAgent(userAgent)) {
                 messageElement.textContent = "Hi, I'm Samir";
             } else {
-                const message = "Hi, I'm Samir";
+                const message = "Hi, I'm Samir, here's a little bit about me: ";
                 let index = 0;
                 const typingEffectElement = document.createElement('span');
                 typingEffectElement.classList.add('typing-effect');
@@ -53,6 +54,16 @@
                         typingEffectElement.textContent += message.charAt(index);
                         index++;
                         setTimeout(type, 100);
+                    } else {
+                        messageElement.innerHTML += `
+                            <ul>
+                                <li>Bachelor's degree in Computer Science</li>
+                                <li>Experience in Full Stack Web Development and Android App Development</li>
+                                <li>Currently learning Machine Learning and Data Science</li>
+                                <li>Linux Enthusiast</li>
+                                <li>Operate a robust home server for hosting, networking, and cloud storage</li>
+                            </ul>
+                        `;
                     }
                 }
 
