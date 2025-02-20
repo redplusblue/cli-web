@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #000;
+            color: #0f0;
+            padding: 20px;
+        }
+        .typing-effect {
+            display: inline-block;
+            border-right: 2px solid;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #0f0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+    <script>
+        function isCLIUserAgent(userAgent) {
+            return /curl|wget|httpie|fetch|http-client/i.test(userAgent);
+        }
+
+        function displayMessage() {
+            const userAgent = navigator.userAgent;
+            const messageElement = document.getElementById('message');
+
+            if (isCLIUserAgent(userAgent)) {
+                messageElement.textContent = "Hi, I'm Samir";
+            } else {
+                const message = "Hi, I'm Samir";
+                let index = 0;
+                const typingEffectElement = document.createElement('span');
+                typingEffectElement.classList.add('typing-effect');
+                messageElement.appendChild(typingEffectElement);
+
+                function type() {
+                    if (index < message.length) {
+                        typingEffectElement.textContent += message.charAt(index);
+                        index++;
+                        setTimeout(type, 100);
+                    }
+                }
+
+                type();
+            }
+        }
+
+        displayMessage();
+    </script>
+</body>
+</html>
